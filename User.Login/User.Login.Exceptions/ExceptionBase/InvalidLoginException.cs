@@ -1,5 +1,4 @@
 ﻿using System.Runtime.Serialization;
-using User.Persistence.Exceptions;
 
 namespace User.Login.Exceptions.ExceptionBase;
 

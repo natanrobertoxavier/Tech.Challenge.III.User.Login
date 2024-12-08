@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace User.Persistence.Exceptions {
+namespace User.Login.Exceptions {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace User.Persistence.Exceptions {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("User.Persistence.Exceptions.ErrorsMessages", typeof(ErrorsMessages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("User.Login.Exceptions.ErrorsMessages", typeof(ErrorsMessages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
