@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+	  <PackageReference Include="Serilog" Version="4.1.0" />
+	  <PackageReference Include="Serilog.Sinks.Console" Version="4.1.0" />
+	  <PackageReference Include="TokenService.Manager" Version="1.0.1" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <ProjectReference Include="..\User.Login.Communication\User.Login.Communication.csproj" />
+    <ProjectReference Include="..\User.Login.Domain\User.Login.Domain.csproj" />
+    <ProjectReference Include="..\User.Login.Exceptions\User.Login.Exceptions.csproj" />
+  </ItemGroup>
+
+</Project>
