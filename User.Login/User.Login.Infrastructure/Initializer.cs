@@ -28,7 +28,7 @@ public static class Initializer
             services.AddFluentMigratorCore().ConfigureRunner(c =>
                  c.AddMySql5()
                   .WithGlobalConnectionString(configurationManager.GetFullConnection())
-                  .ScanIn(Assembly.Load("User.Persistence.Infrastructure")).For.All());
+                  .ScanIn(Assembly.Load("User.Login.Infrastructure")).For.All());
         }
     }
 

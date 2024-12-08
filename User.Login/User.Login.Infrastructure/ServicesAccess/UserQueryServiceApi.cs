@@ -1,4 +1,7 @@
-﻿using Serilog;
+﻿using Newtonsoft.Json;
+using Serilog;
+using System.Text;
+using User.Login.Domain.RequestServices;
 using User.Login.Domain.ResultServices;
 using User.Login.Domain.Services;
 
@@ -20,15 +23,19 @@ public class UserQueryServiceApi(
         {
             var client = _httpClientFactory.CreateClient("UserQueryApi");
 
-            var uri = string.Format("/api/v1/user/{0}", email);
+            var uri = "/api/v1/user/recover-email-password";
 
-            var response = await client.GetAsync(uri);
+            var request = new UserLoginRequest(email, password);
+
+            var jsonContent = JsonConvert.SerializeObject(request);
+
+            var contentRequest = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+            var response = await client.PostAsync(uri, contentRequest);
 
             if (response.IsSuccessStatusCode)
             {
-                var content = await response.Content.ReadAsStringAsync();
-
-                var responseApi = DeserializeResponseObject<Result<UserResult>>(content);
+                var responseApi = DeserializeResponseObject<Result<UserResult>>(await response.Content.ReadAsStringAsync());
 
                 _logger.Information($"{nameof(RecoverByEmailAndPasswordAsync)} - Ended call to User.Query Api. User: {email}.");
 
