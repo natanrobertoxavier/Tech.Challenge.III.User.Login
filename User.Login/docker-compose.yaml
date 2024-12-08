@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  userloginapi:
+    image: userlogin:latest
+    container_name: userlogin_container
+    ports:
+      - "5204:80"
+    environment:
+      ASPNETCORE_ENVIRONMENT: "HML"
+    networks:
+      - techchallengenetwork
+
+networks:
+  techchallengenetwork:
+    external: true

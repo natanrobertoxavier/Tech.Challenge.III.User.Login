@@ -1,0 +1,64 @@
+name: .NET Build, Unit, and Integration Tests, and Publish
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build, Test and Publish
+    runs-on: self-hosted
+
+    steps:
+    # - name: Backup existing code and logs
+    #   run: |
+    #     TIMESTAMP=$(date +"%Y-%m-%d-%H:%M:%S")
+    #     CONTAINER_NAME="userlogin_container"
+    #     LOG_FILE="/home/natan/backups/user-login-logs-$TIMESTAMP.log"
+    #     docker logs $CONTAINER_NAME > $LOG_FILE        
+    #     zip -r /home/natan/backups/user-login-backup-$TIMESTAMP.zip ${{ github.workspace }} $LOG_FILE
+    #     rm $LOG_FILE
+
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Check running user
+      run: whoami
+      
+    # removido pois no meu host já tenho as versões do dotnet instaladas
+    # - name: Setup .NET SDK 8.x
+    #   uses: actions/setup-dotnet@v3
+    #   with:
+    #     dotnet-version: '8.x'
+    
+    - name: Restore dependencies
+      run: dotnet restore User.Login/User.Login.sln
+      
+    - name: Build the project
+      run: dotnet build User.Login/User.Login.sln --no-restore --configuration Release
+
+    - name: Run unit tests
+      run: dotnet test User.Login/User.Login.Tests/User.Login.Tests.csproj --no-build --configuration Release --logger "trx;LogFileName=unit-test-user-Login-results.trx"
+
+    - name: Run integration tests
+      run: dotnet test User.Login/User.Login.Integration.Tests/User.Login.Integration.Tests.csproj --no-build --configuration Release --logger "trx;LogFileName=integration-test-user-Login-results.trx"
+
+    - name: Publish the project
+      if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/release/')
+      run: dotnet publish User.Login/User.Login.sln --no-build --configuration Release --output ${{ github.workspace }}/publish
+      
+    - name: Replace appsettings tech.challenge
+      run: cp -f /home/natan/appsettings/appsettings.json ${{ github.workspace }}/User.Login/User.Login.Api/appsettings.json
+    
+    - name: Stop and remove existing containers
+      run: |
+        cd User.Login && docker-compose -f docker-compose.yaml down
+
+    - name: Build Docker image
+      run: |
+        cd User.Login && sudo docker build -t userlogin:latest .
+
+    - name: Deploy using Docker Compose
+      run: |
+        cd User.Login && docker-compose -f docker-compose.yaml up -d --build
