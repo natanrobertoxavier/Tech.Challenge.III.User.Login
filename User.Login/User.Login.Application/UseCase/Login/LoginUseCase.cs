@@ -28,6 +28,8 @@ public class LoginUseCase(
 
             var encryptedPassword = _passwordEncryptor.Encrypt(request.Password);
 
+            Console.WriteLine("############################################################# -"+encryptedPassword);
+
             var user = await _userQueryServiceApi.RecoverByEmailAndPasswordAsync(request.Email, encryptedPassword);
 
             if (user.IsSuccess)
