@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Testing;
 using Newtonsoft.Json;
-using System.Text;
-using System.Text.Json;
-using User.Login.Communication.Request;
 using User.Login.Integration.Tests.Fakes;
 
 namespace User.Login.Integration.Tests.Api;

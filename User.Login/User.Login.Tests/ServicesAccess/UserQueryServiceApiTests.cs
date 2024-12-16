@@ -1,12 +1,8 @@
 ﻿using FluentAssertions;
 using Moq;
-using Newtonsoft.Json;
 using RichardSzalay.MockHttp;
 using Serilog;
 using System.Net;
-using System.Text;
-using User.Login.Domain.Entities;
-using User.Login.Domain.RequestServices;
 using User.Login.Domain.ResultServices;
 using User.Login.Infrastructure.ServicesAccess;
 

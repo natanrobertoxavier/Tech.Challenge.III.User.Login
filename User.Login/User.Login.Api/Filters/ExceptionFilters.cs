@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Net;
 using User.Login.Communication.Response;
-using User.Login.Exceptions.ExceptionBase;
 using User.Login.Exceptions;
+using User.Login.Exceptions.ExceptionBase;
 
 namespace User.Login.Api.Filters;
 

@@ -1,6 +1,6 @@
 ﻿namespace User.Login.Communication.Request;
 public class RequestLoginJson(
-    string email, 
+    string email,
     string password)
 {
     public string Email { get; set; } = email;

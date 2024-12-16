@@ -45,11 +45,11 @@ public class LoginUseCaseTests
 
         var user = new UserResult()
         {
-           Id =  Guid.NewGuid(),
-           RegistrationDate = DateTime.UtcNow, 
-           Name = "John Cena", 
-           Email = "user@example.com", 
-           Password = encryptedPassword 
+            Id = Guid.NewGuid(),
+            RegistrationDate = DateTime.UtcNow,
+            Name = "John Cena",
+            Email = "user@example.com",
+            Password = encryptedPassword
         };
 
         var expectedUser = output.Success(user);

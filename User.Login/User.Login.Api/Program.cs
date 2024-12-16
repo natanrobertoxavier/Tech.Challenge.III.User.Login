@@ -1,12 +1,11 @@
-using Microsoft.AspNetCore.Mvc.Filters;
 using Prometheus;
 using User.Login.Api;
 using User.Login.Api.Filters;
 using User.Login.Application;
-using User.Login.Infrastructure;
-using User.Login.Infrastructure.RepositoryAccess;
 using User.Login.Domain.Extensions;
+using User.Login.Infrastructure;
 using User.Login.Infrastructure.Migrations;
+using User.Login.Infrastructure.RepositoryAccess;
 
 var builder = WebApplication.CreateBuilder(args);
 
